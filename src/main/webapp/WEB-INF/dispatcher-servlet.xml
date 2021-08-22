@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-3.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <!--
+    Most controllers will use the ControllerClassNameHandlerMapping above, but
+    for the index controller we are using ParameterizableViewController, so we must
+    define an explicit mapping for it.
+    -->
+<!--    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="index.htm">homeController</prop>
+            </props>
+        </property>
+    </bean>
+    
+     <bean name="homeController"
+          class="com.me.finalproject.controller.HomeController" />-->
+    
+<!--    <interceptors>
+		<interceptor>
+			<mapping path="/search-restaurant.htm" />
+			<bean class="com.me.finalproject"></bean>
+		</interceptor>
+    </interceptors>-->
+    
+    
+    
+    <mvc:annotation-driven />
+    <context:annotation-config />
+    <context:component-scan base-package="com.me.finalproject" />
+    
+    
+    <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/customer/**"/>
+			<bean class="com.me.finalproject.interceptor.FinalInterceptor"/>
+		</mvc:interceptor>
+                <mvc:interceptor>
+			<mvc:mapping path="/restaurant/**"/>
+			<bean class="com.me.finalproject.interceptor.FinalInterceptor"/>
+		</mvc:interceptor>
+                <mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<bean class="com.me.finalproject.interceptor.FinalInterceptor"/>
+		</mvc:interceptor>
+    </mvc:interceptors>
+    
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/"
+          p:suffix=".jsp" />
+
+    <!--
+    The index controller.
+    -->
+    
+    
+    
+   
+</beans>
